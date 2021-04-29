@@ -21,7 +21,7 @@ const PageDetail = (argument) => {
   const render = () => {
     pageContent.innerHTML = `
 
-    <a class="btn btn-warning mt-3" href="#pagelist">Retour</a>
+    <a class="btn btn-warning mb-3" href="#pagelist">Retour</a>
 
       <section class="page-detail">
         <div class="article">
