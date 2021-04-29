@@ -10368,6 +10368,7 @@ p {
 
 body {
   background-color: #161616;
+  overflow-y: scroll;
 }
 
 .card {
@@ -10375,18 +10376,27 @@ body {
   position: relative;
 }
 
-/* DEMO GENERAL ============================== */
+.links-center {
+  position: relative;
+  margin-left: 50px;
+  margin-top: 75px;
+}
+
 #card-insert {
   display: grid;
-  grid-template-columns: 400px 400px 400px;
+  grid-template-columns: 300px 300px 300px;
   grid-gap: 10px;
   padding: 10px;
 }
 
+/* DEMO GENERAL ============================== */
 .hover {
   overflow: hidden;
   position: relative;
   padding-bottom: 60%;
+  width: 300px;
+  height: 300px;
+  padding-left: 50px;
 }
 
 .hover-overlay {
@@ -10412,46 +10422,70 @@ body {
   z-index: 99;
 }
 
-/* DEMO 1 ============================== */
-.hover-1 img {
-  width: 105%;
-  position: absolute;
-  top: 0;
-  left: -5%;
-  transition: all 0.3s;
+.platforms-name {
+  font-size: 10px;
 }
 
-.hover-1-content {
+/* DEMO 4 ============================== */
+.hover-4 img {
+  width: 180%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hover-4 .hover-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 90;
+}
+
+.hover-4-title {
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
+  padding: 3rem;
   z-index: 99;
-  transition: all 0.4s;
+  font-size: 24px;
 }
 
-.hover-1 .hover-overlay {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.hover-1-description {
-  transform: translateY(0.5rem);
-  transition: all 0.4s;
+.hover-4-description {
+  position: absolute;
+  top: 2rem;
+  left: 5rem;
+  text-align: left;
+  border-right: 3px solid #fff;
+  padding: 5 1rem;
+  z-index: 99;
+  transform: translateX(-5.5rem);
   opacity: 0;
+  transition: all 0.3s;
+  font-size: 18px;
 }
 
-.hover-1:hover .hover-1-content {
-  bottom: 2rem;
+.noteRate {
+  font-size: 28px;
+  left: 10px;
 }
 
-.hover-1:hover .hover-1-description {
+@media (min-width: 992px) {
+  .hover-4-description {
+    width: 50%;
+  }
+}
+.hover-4:hover img {
+  width: 200%;
+}
+
+.hover-4:hover::after {
   opacity: 1;
   transform: none;
 }
 
-.hover-1:hover img {
-  left: 0;
+.hover-4:hover .hover-4-description {
+  opacity: 1;
+  transform: none;
 }
 
-.hover-1:hover .hover-overlay {
-  opacity: 0;
+.hover-4:hover .hover-overlay {
+  background: rgba(0, 0, 0, 0.8);
 }

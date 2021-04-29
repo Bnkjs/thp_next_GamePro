@@ -16,38 +16,63 @@ const PageList = (argument = "") => {
       fetch(`${finalURL}`)
         .then((response) => response.json())
         .then((response) => {
-          console.log(response.results);
           response.results.forEach((article) => {
             let platformsName = [];
+            let genresList = [];
             article.platforms.forEach((x)=>{
             platformsName.push(x.platform.name);
-          
-            })
-           
+            });
+            article.genres.forEach((g)=>{genresList.push( g.name)});
+
             articles += `
-               
-                <div id="card" class="hover hover-1 text-white rounded"><img src="${article.background_image}" alt="">
-                <div class="hover-overlay"></div>
-                <div class="hover-1-content px-5 py-4">
-                <a id="links" href="#pagedetail/${article.id}">
-                  <h3 class=" hover-1-title text-uppercase font-weight-bold mb-0 text-warning"> <span class="font-weight-light">${article.name}</h3>
-                  </a>
-                  <p class=" font-weight-light mb-0"><a href="#">${platformsName}</a></p>
+        
+            <div class="py-5">
+            <div class="row">
+              <!-- DEMO 4 Item-->
+              <div id="card" class="col-lg-6 mb-3 mb-lg-0">
+                <div class="hover hover-4 text-white img-card rounded"><img src="${article.background_image}" alt="">
+                  <div class="hover-overlay"></div>
+                  <div class="hover-4-content">
+                  <a class="" href="#pagedetail/${article.id}">
+                    <h3 class="hover-4-title  mb-0"><span class=" text-warning font-weight-bold">${article.name}
+                    </a>
+                    <br><span class="platforms-name font-weight-light text-white">${platformsName}</span></h3>
+                    <p class="hover-4-description  infos-game"> Sortie:${article.released}, Note: <span class="text-danger noteRate">${article.rating}</span> <br> ${genresList}</p>
+                  </div>
                 </div>
-                </div>
-                </div>
-             
-                `;
-          });
+              </div>
+            </div>
+          </div>
+          `;
           document.getElementById("card-insert").innerHTML = articles;
-          console.log();
+         fetch(`https://api.rawg.io/api/games/${article.id}?key=${process.env.API_KEY}`)
+            .then((response) => response.json())
+            .then((response) => {
+              let arrResponse =[response];
+              arrResponse.forEach((x)=>{
+              var gameName = x.name;
+              })
+            });
+          });
+       
+
+        // /* -  - - - -  - - - - - - - Hover infos - -  - - - -  - - - - - -  - */
+
+        /* -  - - - -  - - - - - - - Recherche - -  - - - -  - - - - - -  - */  
+          const card = document.querySelectorAll('#card');
+          let i ;
+          for (i = 9; i < 20; i++){
+            let invisible = [i];
+            card[i].style.display='none';
+            }
+            const showmore = document.querySelector('#btn-showmore');
+           
         });
     };
 
     fetchList(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&dates=${today},${oneYearofToday}&ordering=-added`);
-
-    // - - - - - - - - -- REcherche - -  - - -  - - - - -
-   
+    
+ 
   };
 
   const render = () => {
@@ -85,21 +110,31 @@ btnSearch.addEventListener('click',function Value(){
   .then((response) => {
     response.results.forEach((article) => {
       let platformsName = [];
+      let genresList = [];
+      article.genres.forEach((g)=>{genresList.push( g.name)});
       article.platforms.forEach((x)=>{
         platformsName.push(x.platform.name);
       });
       
       articles += `
-      <div id="card" class="hover hover-1 text-white rounded"><img src="${article.background_image}" alt="">
-      <div class="hover-overlay"></div>
-      <div class="hover-1-content px-5 py-4">
-      <a id="links" href="#pagedetail/${article.id}">
-        <h3 class=" hover-1-title text-uppercase font-weight-bold mb-0 text-warning"> <span class="font-weight-light">${article.name}</h3>
-        </a>
-        <p class=" font-weight-light mb-0"><a href="#">${platformsName}</a></p>
+      
+      <div class="py-5">
+      <div class="row">
+        <!-- DEMO 4 Item-->
+        <div id="card" class="col-lg-6 mb-3 mb-lg-0">
+          <div class="hover hover-4 text-white img-card rounded"><img src="${article.background_image}" alt="">
+            <div class="hover-overlay"></div>
+            <div class="hover-4-content">
+            <a class="" href="#pagedetail/${article.id}">
+              <h3 class="hover-4-title  mb-0"><span class=" text-warning font-weight-bold">${article.name}
+              </a>
+              <br><span class="platforms-name font-weight-light text-white">${platformsName}</span></h3>
+              <p class="hover-4-description  infos-game"> Sortie:${article.released}, Note: <span class="text-danger noteRate">${article.rating}</span> <br> ${genresList}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
-      </div>
+    </div>
         `;
     });
     document.getElementById("card-insert").innerHTML = articles;
@@ -120,6 +155,7 @@ fetch(`https://api.rawg.io/api/platforms?key=${process.env.API_KEY}`)
    document.querySelector('#selected-plat').innerHTML= optionValues;
   })
 
+  
 
 export default PageList;
 
